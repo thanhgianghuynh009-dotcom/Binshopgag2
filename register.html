@@ -1,18 +1,109 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Đăng ký</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #111;
+  font-family: Arial;
+}
+
+.box {
+  width: 85%;
+  max-width: 400px;
+  padding: 25px;
+  background: white;
+  border-radius: 15px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+input {
+  width: 90%;
+  padding: 15px;
+  margin: 10px 0;
+  font-size: 18px;
+  border-radius: 10px;
+  border: 1px solid #aaa;
+}
+
+button {
+  width: 95%;
+  padding: 15px;
+  margin-top: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background: black;
+  color: white;
+}
+
+a {
+  display: block;
+  margin-top: 15px;
+}
+</style>
 </head>
+
 <body>
-    <h1>Đăng ký</h1>
 
-    <input type="text" placeholder="Tên tài khoản"><br><br>
+<div class="box">
 
-    <input type="email" placeholder="Email"><br><br>
+<h2>Đăng ký</h2>
 
-    <input type="password" placeholder="Mật khẩu"><br><br>
+<input id="email" placeholder="Nhập Email">
 
-    <button>Đăng ký</button>
+<input id="pass" type="password" placeholder="Nhập mật khẩu">
+
+<button onclick="register()">Đăng ký</button>
+
+<a href="login.html">Đã có tài khoản? Đăng nhập</a>
+
+</div>
+
+
+<script type="module">
+
+import { auth } from "./firebase.js";
+
+import { createUserWithEmailAndPassword }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+window.register = async function(){
+
+let email = document.getElementById("email").value;
+let pass = document.getElementById("pass").value;
+
+
+try {
+
+await createUserWithEmailAndPassword(auth,email,pass);
+
+alert("Đăng ký thành công!");
+
+location.href="login.html";
+
+}
+
+catch(error){
+
+alert(error.message);
+
+}
+
+}
+
+</script>
+
 </body>
 </html>
