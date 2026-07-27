@@ -1,20 +1,15 @@
-<script type="module">
-import { auth } from "./firebase.js";
-import { createUserWithEmailAndPassword } 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
-window.register = async function() {
-  let email = document.getElementById("email").value;
-  let pass = document.getElementById("pass").value;
+const firebaseConfig = {
+  apiKey: "API_KEY_CỦA_M",
+  authDomain: "AUTH_DOMAIN_CỦA_M",
+  projectId: "PROJECT_ID_CỦA_M",
+  storageBucket: "STORAGE_BUCKET_CỦA_M",
+  messagingSenderId: "SENDER_ID_CỦA_M",
+  appId: "APP_ID_CỦA_M"
+};
 
-  try {
-    await createUserWithEmailAndPassword(auth, email, pass);
+const app = initializeApp(firebaseConfig);
 
-    alert("Đăng ký thành công!");
-    window.location.href = "login.html";
-
-  } catch (error) {
-    alert(error.message);
-  }
-}
-</script>
+export const auth = getAuth(app);
